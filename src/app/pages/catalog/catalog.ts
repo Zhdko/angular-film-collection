@@ -3,8 +3,10 @@ import { FilmService } from '../../core/services/film.service';
 import { FilmCard } from './components/film-card/film-card';
 import { AutofocusDirective } from '../../shared/directives/autofocus.directive';
 import { NgOptimizedImage } from '@angular/common';
+
 @Component({
   selector: 'app-catalog',
+  standalone: true,
   imports: [FilmCard, AutofocusDirective, NgOptimizedImage],
   templateUrl: './catalog.html',
   styleUrl: './catalog.scss',
@@ -17,20 +19,16 @@ export class Catalog {
   readonly filteredFilms = this.filmService.filteredFilms;
   readonly searchQuery = this.filmService.searchQuery;
 
-  applyFilter(query: string): void {
-    console.log('Filtering by:', query);
-  }
-
   onSearchChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.applyFilter(input.value);
+    this.filmService.searchQuery.set(input.value);
   }
 
   toggleSearch(): void {
     this.isSearchVisible.update((value) => !value);
 
     if (!this.isSearchVisible()) {
-      this.applyFilter('');
+      this.filmService.searchQuery.set('');
     }
   }
 
