@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input } from '@angular/core';
 import { FilmService } from '../../core/services/film.service';
 import { DurationPipe } from '../../shared/pipes/duration.pipe';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { BreadcrumbService } from '../../core/services/breadcrums.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,16 +13,24 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieDetails {
-  readonly filmService = inject(FilmService);
+  private readonly filmService = inject(FilmService);
+  private readonly breadcrumbService = inject(BreadcrumbService);
+
   readonly id = input.required<string>();
 
   readonly film = computed(() => {
     const currentId = this.id();
-    if (!currentId) return null;
-
-    const filmId = Number(currentId);
-    return this.filmService.getFilmById(filmId);
+    return currentId ? this.filmService.getFilmById(Number(currentId)) : null;
   });
+
+  constructor() {
+    effect(() => {
+      const movieData = this.film();
+      if (movieData?.title) {
+        this.breadcrumbService.setDynamicTitle(movieData.title);
+      }
+    });
+  }
 
   goBack(): void {
     window.history.back();

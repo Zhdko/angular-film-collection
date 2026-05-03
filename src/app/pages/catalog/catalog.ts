@@ -3,7 +3,6 @@ import { FilmService } from '../../core/services/film.service';
 import { FilmCard } from './components/film-card/film-card';
 import { AutofocusDirective } from '../../shared/directives/autofocus.directive';
 import { NgOptimizedImage } from '@angular/common';
-
 @Component({
   selector: 'app-catalog',
   imports: [FilmCard, AutofocusDirective, NgOptimizedImage],

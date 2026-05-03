@@ -1,0 +1,16 @@
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { BreadcrumbService } from '../../../core/services/breadcrums.service';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-breadcrumbs',
+  imports: [RouterLink],
+  templateUrl: './breadcrumbs.html',
+  styleUrl: './breadcrumbs.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class Breadcrumbs {
+  protected readonly breadcrumbService = inject(BreadcrumbService);
+
+  readonly breadcrumbs = this.breadcrumbService.breadcrumbs;
+}
