@@ -17,4 +17,9 @@ export const routes: Routes = [
     redirectTo: 'catalog',
     pathMatch: 'full',
   },
+  {
+    path: '**',
+    redirectTo: 'catalog',
+    pathMatch: 'full',
+  },
 ];
