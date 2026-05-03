@@ -13,11 +13,16 @@
           (input)="onSearchChange($event)"
         />
       }
-      <button aria-label="Toggle search" class="catalog__search-btn" (click)="toggleSearch()">
+      <button
+        aria-label="Toggle search"
+        class="catalog__search-btn"
+        type="button"
+        (click)="toggleSearch()"
+      >
         @if (isSearchVisible()) {
-          <img alt="Close" class="catalog__icon" src="icons/close.svg" />
+          <img alt="Close" class="catalog__icon" height="40" ngSrc="icons/close.svg" width="40" />
         } @else {
-          <img alt="Search" class="catalog__icon" src="icons/search.svg" />
+          <img alt="Search" class="catalog__icon" height="40" ngSrc="icons/search.svg" width="40" />
         }
       </button>
     </div>
@@ -29,7 +34,13 @@
     } @empty {
       <div class="catalog__empty">
         <div class="catalog__empty-content">
-          <img alt="Nothing found" class="catalog__empty-image" src="/images/not-found.png" />
+          <img
+            alt="Nothing found"
+            class="catalog__empty-image"
+            height="200"
+            ngSrc="/images/not-found.png"
+            width="500"
+          />
           <h2 class="catalog__empty-title">Oops...</h2>
           <p class="catalog__empty-text">
             We searched everywhere, but we couldn't find any results for

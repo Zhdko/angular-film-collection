@@ -1,0 +1,36 @@
+@if (film(); as f) {
+  <div class="movie-page">
+    <div class="movie-page__bg-blur" [style.backgroundImage]="'url(' + f.posterUrl + ')'"></div>
+    <div class="movie-page__overlay"></div>
+
+    <div class="movie-page__content">
+      <div class="movie-page__info-wrapper">
+        <h1 class="movie-page__title">{{ f.title }}</h1>
+        <p class="movie-page__description">{{ f.description }}</p>
+
+        <div class="movie-page__meta">
+          <span class="rating">⭐ {{ f.rating }}</span>
+          <span class="year">{{ f.year }}</span>
+          <span class="duration">{{ f.duration | duration }}</span>
+        </div>
+      </div>
+
+      <div class="movie-page__poster-wrapper">
+        <img
+          class="movie-page__main-poster"
+          height="550"
+          width="380"
+          [alt]="f.title"
+          [ngSrc]="f.posterUrl"
+        />
+      </div>
+    </div>
+
+    <button
+      aria-label="Back to previous page"
+      class="back-btn-bottom"
+      type="button"
+      (click)="goBack()"
+    ></button>
+  </div>
+}

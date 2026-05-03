@@ -5,16 +5,18 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class DurationPipe implements PipeTransform {
-  transform(value: number | null | undefined): string {
-    if (!value && value !== 0) return '';
-
-    const hours = Math.floor(value / 60);
-    const minutes = value % 60;
-
-    if (hours > 0) {
-      return `${hours}h ${minutes > 0 ? minutes + 'm' : ''}`.trim();
+  transform(value: number | string | null | undefined): string {
+    if (value === null || value === undefined || value === '') {
+      return '';
     }
 
-    return `${minutes}m`;
+    const minutes = typeof value === 'string' ? parseInt(value, 10) : value;
+
+    if (isNaN(minutes)) return '';
+
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+
+    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
   }
 }

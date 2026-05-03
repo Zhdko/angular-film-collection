@@ -24,8 +24,8 @@ describe('DurationPipe', () => {
   });
 
   it('should return an empty string for null or undefined', () => {
-    expect(pipe.transform(null as any)).toBe('');
-    expect(pipe.transform(undefined as any)).toBe('');
+    expect(pipe.transform(null)).toBe('');
+    expect(pipe.transform(undefined)).toBe('');
   });
 
   it('should return "0m" for a value of 0', () => {
