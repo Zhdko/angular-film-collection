@@ -1,6 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { Film } from '../models/film.model';
 import filmsData from '../../../assets/data/films.json';
+import { Film } from '../models/films.model';
 
 @Injectable({
   providedIn: 'root',
