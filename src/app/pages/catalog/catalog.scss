@@ -2,16 +2,78 @@
 
 .catalog {
   background-color: $bg-color;
-  min-height: 100vh;
-  padding: 40px 20px;
+  padding: 20px;
   font-family: $font-family;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 10px;
+  }
 
   &__title {
     color: $text-main;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: $font-weight-black;
-    margin: 0 0 30px 0;
-    padding-left: 10px;
+    margin: 0;
+  }
+
+  &__search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &--active {
+      .catalog__search-input {
+        width: 300px;
+        opacity: 1;
+        visibility: visible;
+        padding: 10px 16px;
+      }
+    }
+  }
+
+  &__search-input {
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px 0;
+    background-color: $dark-grey;
+    border: 1px solid $grey;
+    border-radius: 50px;
+    color: $text-main;
+    font-family: $font-family;
+    transition: all $transition-speed;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 
   &__grid {
@@ -27,6 +89,50 @@
     @media (max-width: 600px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px 12px;
+    }
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    &-content {
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    &-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      opacity: 0.8;
+      filter: grayscale(1) brightness(0.8);
+    }
+
+    &-title {
+      color: $text-main;
+      font-size: 2rem;
+      font-weight: $font-weight-black;
+      margin: 0;
+    }
+
+    &-text {
+      color: $text-muted;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    &-query {
+      color: $red;
+      font-weight: $font-weight-medium;
+      font-style: italic;
     }
   }
 }

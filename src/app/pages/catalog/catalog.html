@@ -1,9 +1,40 @@
 <div class="catalog">
-  <h1 class="catalog__title">Movies</h1>
+  <div class="catalog__header">
+    <h1 class="catalog__title">movies</h1>
+
+    <div class="catalog__search-box" [class.catalog__search-box--active]="isSearchVisible()">
+      <input
+        appAutofocus
+        class="catalog__search-input"
+        placeholder="Search by title..."
+        type="text"
+        [value]="searchQuery()"
+        (input)="onSearchChange($event)"
+      />
+      <button aria-label="Toggle search" class="catalog__search-btn" (click)="toggleSearch()">
+        @if (isSearchVisible()) {
+          <img alt="Close" class="catalog__icon" src="icons/close.svg" />
+        } @else {
+          <img alt="Search" class="catalog__icon" src="icons/search.svg" />
+        }
+      </button>
+    </div>
+  </div>
 
   <div class="catalog__grid">
-    @for (movie of films(); track movie.id) {
+    @for (movie of filteredFilms(); track movie.id) {
       <app-film-card [film]="movie" (toggleFavorite)="toggleFavorite($event)" />
+    } @empty {
+      <div class="catalog__empty">
+        <div class="catalog__empty-content">
+          <img alt="Nothing found" class="catalog__empty-image" src="/images/not-found.png" />
+          <h2 class="catalog__empty-title">Oops...</h2>
+          <p class="catalog__empty-text">
+            We searched everywhere, but we couldn't find any results for
+            <span class="catalog__empty-query">"{{ searchQuery() }}"</span>
+          </p>
+        </div>
+      </div>
     }
   </div>
 </div>
