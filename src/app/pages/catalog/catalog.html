@@ -1,0 +1,9 @@
+<div class="catalog">
+  <h1 class="catalog__title">Movies</h1>
+
+  <div class="catalog__grid">
+    @for (movie of films(); track movie.id) {
+      <app-film-card [film]="movie" (toggleFavorite)="toggleFavorite($event)" />
+    }
+  </div>
+</div>

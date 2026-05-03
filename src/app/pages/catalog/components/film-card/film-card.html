@@ -1,0 +1,26 @@
+<div class="film-card" [routerLink]="['/film', film().id]">
+  <div class="film-card__poster-wrapper">
+    <img class="film-card__poster" [alt]="film().title" [src]="film().posterUrl" />
+
+    <div class="film-card__rating">
+      {{ film().rating }}
+    </div>
+
+    <button
+      class="film-card__favorite-btn"
+      [attr.aria-label]="film().isFavorite ? 'Remove from favorites' : 'Add to favorites'"
+      (click)="onFavoriteClick($event)"
+    >
+      @if (film().isFavorite) {
+        <span class="film-card__heart film-card__heart--active">❤️</span>
+      } @else {
+        <span class="film-card__heart">🤍</span>
+      }
+    </button>
+  </div>
+
+  <div class="film-card__info">
+    <h3 class="film-card__title">{{ film().title }}</h3>
+    <p class="film-card__meta">{{ film().genre }} • {{ film().year }}</p>
+  </div>
+</div>
