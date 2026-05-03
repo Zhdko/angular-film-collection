@@ -1,0 +1,9 @@
+@use 'variables' as v;
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 70px);
+  padding-top: 70px;
+  background-color: v.$bg-color;
+}
